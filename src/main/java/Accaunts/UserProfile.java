@@ -34,8 +34,7 @@ public class UserProfile {
     @Override
     public String toString() {
         return login + '\'' +
-                ", passvord='" + passvord + '\'' +
-                ", email='" + email + '\''
-                ;
+                " your pass " + passvord + '\'' +
+                " you email " + email + '\'';
     }
 }

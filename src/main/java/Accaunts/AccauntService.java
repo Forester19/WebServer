@@ -5,7 +5,7 @@ import java.util.Map;
 
 
 public class AccauntService {
-    private Map<String,UserProfile> loginToProfile;
+    private  Map<String,UserProfile> loginToProfile;
     private Map<String,UserProfile> sessionToProfile;
 
     public AccauntService() {
@@ -29,7 +29,15 @@ public class AccauntService {
     public void deleteSession(String sessionId){
         loginToProfile.remove(sessionId);
     }
-    public Map getMapLoginToProfile(){
+    public  Map getMapLoginToProfile(){
         return loginToProfile;
+    }
+    public int showSize(){
+
+          return loginToProfile.size();
+
+}
+    public void geleteByLogin(){
+
     }
 }
