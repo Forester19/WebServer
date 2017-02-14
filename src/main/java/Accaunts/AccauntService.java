@@ -37,7 +37,7 @@ public class AccauntService {
           return loginToProfile.size();
 
 }
-    public void geleteByLogin(){
-
+    public void deleteByLogin(String log){
+         loginToProfile.remove(log);
     }
 }

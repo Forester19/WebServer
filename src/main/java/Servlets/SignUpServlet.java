@@ -5,6 +5,7 @@ import Accaunts.UserProfile;
 import Tamplate.PageGenerator;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import java.util.Random;
 /**
  * Created by Владислав on 23.01.2017.
  */
+@WebServlet(name = "signUpServlet", urlPatterns = {"/api/v1/signup"})
 public class SignUpServlet extends HttpServlet {
     private AccauntService accauntService;
     String session;
@@ -27,9 +29,6 @@ public class SignUpServlet extends HttpServlet {
     public SignUpServlet() {
 
     }
-
-
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -55,7 +54,7 @@ public class SignUpServlet extends HttpServlet {
             Map<String, Object> data =accauntService.getMapLoginToProfile();
             resp.getWriter().println(PageGenerator.instance().getPage("SignUpResult.html", data));
             resp.getWriter().println("\n dear \n" + accauntService.getUsersByLogin(login).toString());
-            resp.getWriter().println("\n dear \n" + accauntService.showSize());
+
             resp.setContentType("text/html;charset=utf-8");
             resp.setStatus(HttpServletResponse.SC_OK);
 

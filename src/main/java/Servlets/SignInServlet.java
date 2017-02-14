@@ -4,6 +4,8 @@ import Accaunts.AccauntService;
 import Accaunts.UserProfile;
 import Tamplate.PageGenerator;
 import org.eclipse.jetty.server.Authentication;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,11 +20,13 @@ import java.util.Map;
  */
 public class SignInServlet extends HttpServlet {
 
-    AccauntService accauntService;
-    SignUpServlet signUpServlet = new SignUpServlet(accauntService);
+    private AccauntService accauntService;
+private   UserProfile userProfile;
+
 //    String email = userProfile.getEmail();
 
-
+    private String login;
+    private String pass;
 
 
     public SignInServlet(AccauntService accauntService) {
@@ -30,12 +34,14 @@ public class SignInServlet extends HttpServlet {
     }
 
 
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       String login = req.getParameter("login");
-       String pass = req.getParameter("pass");
 
-        UserProfile userProfile;
+
+        login = req.getParameter("login");
+        pass = req.getParameter("pass");
+
 
         Map<String,Object> data = accauntService.getMapLoginToProfile();
 
@@ -51,7 +57,7 @@ public class SignInServlet extends HttpServlet {
 
             if (login.equals(userProfile.getLogin())&&pass.equals(userProfile.getPassvord())){
 
-                resp.getWriter().println(PageGenerator.instance().getPage("SignIn.html", data));
+                resp.getWriter().println(PageGenerator.instance().getPage("html2/SignIn.html", data));
                 resp.getWriter().println("\n client \n" + userProfile.toString());
                 resp.setContentType("text/html;charset=utf-8");
                 resp.setStatus(HttpServletResponse.SC_OK);
@@ -74,6 +80,17 @@ public class SignInServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-   accauntService.
+
+    }
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public UserProfile getUserProfile() {
+        return userProfile;
     }
 }
